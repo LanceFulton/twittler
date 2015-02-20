@@ -29,7 +29,7 @@
           while(index >= tweetedLocal){
             var tweet = streams.home[index];
             var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message + "    " + "(" + $.now() + ")");
+            $tweet.html('@' + "<span class='tweeter'>" + tweet.user + "</span>" + ': ' + tweet.message + "    " + "(" + $.now() + ")");
             $tweet.appendTo($body);
             tweetedGlobal ++;
             index -= 1;
@@ -38,10 +38,18 @@
         };
 
         generate();
+        clickify();
 
         $('button').on('click', function(){
           generate();
+          clickify();
         })
+
+        function clickify () {
+          $('.tweeter').on('click', function(){
+            alert('hey');
+          })
+        };
 
       });
 
