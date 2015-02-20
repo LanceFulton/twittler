@@ -21,25 +21,26 @@
         var $body = $('body');
         // $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+        var tweetedGlobal = 0;
+        var tweetedLocal = 0;
 
-        $('button').on('click', function(){
-          index = streams.home.length - 1;
-          while(index >= 0){
+        var generate = function() {
+          var index = streams.home.length - 1;
+          while(index >= tweetedLocal){
             var tweet = streams.home[index];
             var $tweet = $('<div></div>');
             $tweet.text('@' + tweet.user + ': ' + tweet.message);
             $tweet.appendTo($body);
+            tweetedGlobal ++;
             index -= 1;
           }
+          tweetedLocal = tweetedGlobal;
+        };
 
+        generate();
+
+        $('button').on('click', function(){
+          generate();
         })
 
       });
