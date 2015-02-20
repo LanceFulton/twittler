@@ -28,7 +28,7 @@
           var index = streams.home.length - 1;
           while(index >= tweetedLocal){
             var tweet = streams.home[index];
-            var $tweet = $('<div></div>');
+            var $tweet = $('<div class="tweet"></div>');
             $tweet.html('@' + "<span class='tweeter'>" + tweet.user + "</span>" + ': ' + tweet.message + "    " + "(" + $.now() + ")");
             $tweet.appendTo($body);
             tweetedGlobal ++;
@@ -47,8 +47,13 @@
 
         function clickify () {
           $('.tweeter').on('click', function(){
-            alert('hey');
+            generateByUser();
           })
+        };
+
+        function generateByUser(user) {
+          $('.tweet').remove();
+
         };
 
       });
