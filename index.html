@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="content">
-      <h1>TWITTLER</h1>
+      <a href="index.html"><h1>TWITTLER</h1></a>
       <div id="update">
         <button type="button"><p>Update Tweets</p></button>
       </div>
@@ -31,6 +31,7 @@
             $tweet.html('@' + "<span class='tweeter'>" + tweet.user + "</span>" + ': ' + tweet.message + "    " + "(" + $.now() + ")");
             $tweet.appendTo($body);
             $('.tweeter').on('click', function(){
+              $('button').hide();
               $tweeter = $(this).text();
               userTweets($tweeter);
             });
