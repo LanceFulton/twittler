@@ -16,7 +16,6 @@
     </div>
 
     <script>
-
       $(document).ready(function(){
         var $body = $('body');
         // $body.html('');
@@ -31,30 +30,38 @@
             var $tweet = $('<div class="tweet"></div>');
             $tweet.html('@' + "<span class='tweeter'>" + tweet.user + "</span>" + ': ' + tweet.message + "    " + "(" + $.now() + ")");
             $tweet.appendTo($body);
+            $('.tweeter').on('click', function(){
+              $tweeter = $(this).text();
+              userTweets($tweeter);
+            });
             tweetedGlobal ++;
-            index -= 1;
+            tweetedLocal = tweetedGlobal;
+            index--;
           }
-          tweetedLocal = tweetedGlobal;
+        };
+
+        function userTweets(tweeter) {
+          $('.tweet').remove();
+          var userIndex = streams.users[tweeter].length - 1;
+          while (userIndex >= 0) {
+            var tweet = streams.users[tweeter][userIndex];
+            var $tweet = $('<div class="userTweet"></div>');
+            $tweet.html('@' + "<span>" + tweet.user + "</span>" + ': ' + tweet.message + "    " + "(" + $.now() + ")");
+            $tweet.appendTo($body);
+            userIndex --;
+          }
         };
 
         generate();
         clickify();
 
-        $('button').on('click', function(){
-          generate();
-          clickify();
-        })
-
         function clickify () {
-          $('.tweeter').on('click', function(){
-            generateByUser();
+          $('button').on('click', function(){
+            generate();
           })
         };
 
-        function generateByUser(user) {
-          $('.tweet').remove();
 
-        };
 
       });
 
